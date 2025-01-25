@@ -3,6 +3,8 @@ import mongoConnection from "./config/mongo.connection.js";
 import authroutes from "./routes/auth.routes.js";
 import cors from "cors";
 import sendResponse from "./helpers/send.response.js";
+import 'dotenv/config'
+
 const app = express();
 mongoConnection();
 

@@ -16,10 +16,9 @@ async function sendVerificationEmail(to, verificationLink, username) {
     if (error) {
       return console.error(error);
     }
-    console.log(info);
+    console.log("info=", info)
+    return info
   });
-  console.log(info);
-  return info;
 }
 
 export default sendVerificationEmail;

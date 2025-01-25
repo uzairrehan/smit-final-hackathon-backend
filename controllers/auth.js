@@ -104,7 +104,7 @@ async function registerController(req, res) {
     const newUser = await user.save();
 
     // Generate verification token
-    const token = jwt.sign(
+    const token = await jwt.sign(
       { id: user._id, username: username },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -112,8 +112,10 @@ async function registerController(req, res) {
 
     const fullURL = `${process.env.SERVER_URL}/auth/verify-email?token=${token}`;
 
-    await sendVerificationEmail(email, fullURL, username);
-
+    const info = await sendVerificationEmail(email, fullURL, username);
+    
+    console.log("info =>",info);
+    
     sendResponse(
       res,
       201,
