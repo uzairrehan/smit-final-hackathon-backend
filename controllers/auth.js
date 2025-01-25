@@ -13,12 +13,12 @@ async function verifyEmailController(req, res) {
     if (!token) {
       return sendResponse(res, 400, {}, true, "Token is required");
     }
-    let userID = ""
-    let usernamee = ""
+    let userID = "";
+    let usernamee = "";
     try {
-     let { id ,username} = jwt.verify(token, process.env.JWT_SECRET);
-     userID = id
-     usernamee =username
+      let { id, username } = jwt.verify(token, process.env.JWT_SECRET);
+      userID = id;
+      usernamee = username;
     } catch (err) {
       console.error("JWT verification failed:", err.message);
       return sendResponse(res, 400, {}, true, "Invalid or expired token");
@@ -105,7 +105,7 @@ async function registerController(req, res) {
 
     // Generate verification token
     const token = jwt.sign(
-      { id: user._id,username:username },
+      { id: user._id, username: username },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -113,7 +113,7 @@ async function registerController(req, res) {
     const fullURL = `https://full-express-auth-code.vercel.app/authentication/verify-email?token=${token}`;
 
     await sendVerificationEmail(email, fullURL, username);
-    
+
     sendResponse(
       res,
       201,
