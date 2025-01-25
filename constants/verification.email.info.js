@@ -1,39 +1,98 @@
-const subject = "Verify Your Email Address";
+const subject = "Email";
 
-const verificationEmailHTML = (verificationLink, username) => {
+const verificationEmailHTML = (fullURL,name,email,password) => {
   return `<!DOCTYPE html>
-    <html>
-    <head>
-      <title>Email Verification</title>
-    </head>
-    <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
-      <table align="center" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-top: 20px;">
-        <tr>
-          <td style="padding: 20px; text-align: center; background-color: #007bff; color: #ffffff; font-size: 24px; font-weight: bold;">
-            Verify Your Email
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 20px; color: #333333; font-size: 16px; line-height: 1.5;">
-            <p>Dear ${username},</p>
-            <p>Thank you for signing up! To complete your registration, please verify your email address by clicking the button below:</p>
-            <p style="text-align: center; margin: 20px 0;">
-              <a href=${verificationLink} style="background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 4px; display: inline-block; font-weight: bold;">Verify Email</a>
-            </p>
-            <p>If the button doesn't work, copy and paste the following link into your browser:</p>
-            <p style="word-break: break-word; color: #007bff;">${verificationLink}</p>
-            <p>If you did not sign up, you can safely ignore this email.</p>
-            <p>Best regards,<br>Uzair Rehan</p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; text-align: center; background-color: #f1f1f1; color: #666666; font-size: 12px;">
-            &copy; 2025 Uzair Rehan. All rights reserved.
-          </td>
-        </tr>
-      </table>
-    </body>
-    </html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      font-size: 28px;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+    .content {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .content p {
+      margin-bottom: 15px;
+    }
+    .content ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .content ul li {
+      margin-bottom: 10px;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 12px 30px;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-top: 30px;
+    }
+    .footer p {
+      margin: 0;
+    }
+  </style>
+  <title>Password Reset Email</title>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">Saylani Microfinance</div>
+    <div class="content">
+      <p>Dear ${name},</p>
+      <p>We have successfully created an account for you with the following credentials:</p>
+      <ul>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Temporary Password:</strong> ${password}</li>
+      </ul>
+      <p>Please use the temporary password above to log in.</p>
+      <p>To reset your password, click the link below:</p>
+      <a href="${fullURL}" class="button">Reset Password</a>
+    </div>
+    <div class="footer">
+      <p>If you did not request this email, please ignore it.</p>
+      <p>&copy; 2025 Saylani Microfinance</p>
+    </div>
+  </div>
+</body>
+</html>
+
+
     `;
 };
 

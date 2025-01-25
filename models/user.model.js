@@ -5,13 +5,8 @@ const userSchema = new mongoose.Schema({
     type: String, 
     unique: true, 
     required: true,
-    validate: {
-      validator: function(value) {
-        // Ensure the CNIC is exactly 13 characters
-        return value.length === 13;
-      },
-      message: 'CNIC must be exactly 13 characters long.'
-    }
+    max:[13,"must be at least 13 characters"],
+    min:[13,"must be at least 13 characters"]
   },
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },

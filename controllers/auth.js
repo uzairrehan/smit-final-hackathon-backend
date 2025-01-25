@@ -1,9 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import sendVerificationEmail from "../services/mail.service.js";
+import sendEmail from "../services/mail.service.js";
 import sendResponse from "../helpers/send.response.js";
 import { verifyPageHTML } from "../constants/verification.email.info.js";
+import crypto from "crypto";
+
 
 // Verify Email Controller
 async function verifyEmailController(req, res) {
@@ -85,10 +87,10 @@ async function loginController(req, res) {
 
 // Register Controller
 async function registerController(req, res) {
-  const { email, username, password } = req.body;
+  const { cnic, name, email } = req.body;
 
   try {
-    if (!email || !username || !password) {
+    if (!cnic || !name || !email) {
       return sendResponse(res, 400, {}, true, "All fields are required");
     }
 
@@ -98,21 +100,20 @@ async function registerController(req, res) {
       return sendResponse(res, 409, {}, true, "Email already in use");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const password = crypto.randomBytes(8).toString('hex');
 
-    const user = new User({ email, username, password: hashedPassword });
+    const user = new User({ email, name, cnic,password });
     const newUser = await user.save();
 
-    // Generate verification token
     const token = await jwt.sign(
-      { id: user._id, username: username },
+      { id: user._id,  email, name, cnic },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    const fullURL = `${process.env.SERVER_URL}/auth/verify-email?token=${token}`;
+    const fullURL = `${process.env.SERVER_URL}/auth/forgot-password?token=${token}`;
 
-    const info = await sendVerificationEmail(email, fullURL, username);
+    const info = await sendEmail(fullURL,name,email,password);
     
     console.log("info =>",info);
     
@@ -121,11 +122,11 @@ async function registerController(req, res) {
       201,
       { user: newUser },
       false,
-      "Registration successful. Please verify your email."
+      "Registration successful .weve sended an email for your user."
     );
   } catch (error) {
     console.error(error);
-    sendResponse(res, 500, {}, true, "Internal server error");
+    sendResponse(res, 500, {}, true, error);
   }
 }
 
