@@ -1,5 +1,5 @@
 import {
-  verifyEmailController,
+  resetPasswordController,
   loginController,
   registerController,
 } from "../controllers/auth.js";
@@ -15,6 +15,6 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 
 // email verification
-router.get("/verify-email", verifyEmailController);
+router.post("/changepassword", resetPasswordController);
 
 export default router;

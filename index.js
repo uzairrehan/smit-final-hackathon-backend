@@ -25,9 +25,9 @@ app.get("/", (req, res) => {
   res.send("Hello Uzair");
 });
 
-app.use((req, res) => {
-  sendResponse(res, 400, {}, true, "Page not found");
-});
+// app.use((req, res) => {
+//   sendResponse(res, 400, {}, true, "Page not found");
+// });
 
 app.listen(process.env.PORT, () => {
   console.log(`App is running on localhost:${process.env.PORT}`);
