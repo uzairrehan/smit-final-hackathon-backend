@@ -6,13 +6,14 @@ import sendResponse from "./helpers/send.response.js";
 const app = express();
 mongoConnection();
 
-const allowedOrigins = process.env.CORS_ALLOWED.split(",");
+const allowedOrigins = JSON.parse(process.env.CORS_ALLOWED);
+const corsOptions = {
+  origin: allowedOrigins,
+  methods: "GET, POST, PUT, DELETE",
+  allowedHeaders: "Content-Type, Authorization",
+};
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-  })
-);
+app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

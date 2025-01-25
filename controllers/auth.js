@@ -110,7 +110,7 @@ async function registerController(req, res) {
       { expiresIn: "1h" }
     );
 
-    const fullURL = `${process.env.CLIENT_URL}/auth/verify-email?token=${token}`;
+    const fullURL = `${process.env.SERVER_URL}/auth/verify-email?token=${token}`;
 
     await sendVerificationEmail(email, fullURL, username);
 
