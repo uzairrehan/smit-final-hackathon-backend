@@ -10,14 +10,9 @@ import "dotenv/config";
 const app = express();
 mongoConnection();
 
-const allowedOrigins = JSON.parse(process.env.CORS_ALLOWED);
-const corsOptions = {
-  origin: allowedOrigins,
-  methods: "GET, POST, PUT, DELETE",
-  allowedHeaders: "Content-Type, Authorization",
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors("*"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

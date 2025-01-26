@@ -22,4 +22,4 @@ async function sendVerificationEmail(fullURL,name,email,password) {
 }
 
 export default sendVerificationEmail;
-  
+ 
