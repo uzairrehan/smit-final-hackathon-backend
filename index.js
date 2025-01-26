@@ -5,7 +5,7 @@ import loanRoutes from "./routes/loans.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import cors from "cors";
 import sendResponse from "./helpers/send.response.js";
-import 'dotenv/config'
+import "dotenv/config";
 
 const app = express();
 mongoConnection();

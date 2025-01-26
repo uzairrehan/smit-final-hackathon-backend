@@ -1,8 +1,8 @@
 import qrcode from "qrcode";
 import { Router } from "express";
 const router = Router();
-
-router.post("/", async (req, res) => {
+import LoanRequest from "../models/loan.model.js"
+router.post("/addloan", async (req, res) => {
   const {
     userId,
     category,
