@@ -91,7 +91,7 @@ async function registerController(req, res) {
       { expiresIn: "1h" }
     );
 
-    const fullURL = `${process.env.CLIENT_URL}/auth/forgot-password`;
+    const fullURL = `${process.env.CLIENT_URL}/auth/forgotpassword`;
 
     // Send email with the temporary password
     const info = await sendEmail(fullURL, name, email, rawPassword);
