@@ -91,7 +91,7 @@ async function registerController(req, res) {
       { expiresIn: "1h" }
     );
 
-    const fullURL = `${process.env.CLIENT_URL}/auth/forgotpassword`;
+    const fullURL = `https://smit-final-frontend-uzair.vercel.app/auth/forgotpassword`;
 
     // Send email with the temporary password
     const info = await sendEmail(fullURL, name, email, rawPassword);
